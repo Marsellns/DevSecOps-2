@@ -36,8 +36,7 @@ async function loadProducts() {
 function canTransition(status, role) {
     const transitions = {
         'manufactured': ['distributor', 'admin'],
-        'distributed': ['retailer', 'admin'],
-        'retail': ['retailer', 'admin'],
+        'distributed': ['distributor', 'admin'],
     };
     return transitions[status] && transitions[status].includes(role);
 }
@@ -70,7 +69,6 @@ async function viewHistory(productId) {
         const statusLabels = {
             'manufactured': '🏭 Manufactured',
             'distributed': '🚚 Distributed',
-            'retail': '🏪 In Retail',
             'sold': '✅ Sold to Customer',
         };
 

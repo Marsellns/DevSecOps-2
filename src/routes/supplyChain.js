@@ -6,12 +6,11 @@ const router = express.Router();
 
 const VALID_TRANSITIONS = {
     'manufactured': { next: 'distributed', roles: ['distributor', 'admin'] },
-    'distributed': { next: 'retail', roles: ['retailer', 'admin'] },
-    'retail': { next: 'sold', roles: ['retailer', 'admin'] },
+    'distributed': { next: 'sold', roles: ['distributor', 'admin'] },
 };
 
 // POST /api/supply-chain/:productId — Update product status
-router.post('/:productId', authenticateToken, authorize('distributor', 'retailer', 'admin'), (req, res) => {
+router.post('/:productId', authenticateToken, authorize('distributor', 'admin'), (req, res) => {
     const { productId } = req.params;
 
     try {
@@ -71,7 +70,7 @@ router.get('/:productId', authenticateToken, (req, res) => {
 });
 
 // GET /api/supply-chain — List all products with status for supply chain view
-router.get('/', authenticateToken, authorize('distributor', 'retailer', 'admin'), (req, res) => {
+router.get('/', authenticateToken, authorize('distributor', 'admin'), (req, res) => {
     try {
         const products = dbAll(
             'SELECT product_id, product_name, batch_number, status, created_at FROM products ORDER BY created_at DESC'

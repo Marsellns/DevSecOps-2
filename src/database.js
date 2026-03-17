@@ -36,7 +36,7 @@ function initDatabase() {
         }
         // Always ensure existing seed users are set to approved
         try {
-            db.run("UPDATE users SET status = 'approved' WHERE status IS NULL OR (status = 'pending' AND username IN ('admin', 'manufacturer', 'distributor', 'retailer', 'customer'))");
+            db.run("UPDATE users SET status = 'approved' WHERE status IS NULL OR (status = 'pending' AND username IN ('admin', 'distributor', 'customer'))");
         } catch (e) {
             // ignore
         }
@@ -44,9 +44,7 @@ function initDatabase() {
         // Seed default users for all roles
         const defaultUsers = [
             { username: 'admin',        password: 'admin123',    role: 'admin' },
-            { username: 'manufacturer', password: 'mfr123456',   role: 'manufacturer' },
             { username: 'distributor',  password: 'dist123456',  role: 'distributor' },
-            { username: 'retailer',     password: 'ret123456',   role: 'retailer' },
             { username: 'customer',     password: 'cust123456',  role: 'customer' },
         ];
 

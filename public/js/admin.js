@@ -136,7 +136,7 @@ function getStatusBadgeUser(status) {
 }
 
 function getRoleBadge(role) {
-    const map = { admin: 'danger', manufacturer: 'info', distributor: 'warning', retailer: 'success', customer: 'neutral' };
+    const map = { admin: 'danger', distributor: 'warning', customer: 'neutral' };
     return map[role] || 'neutral';
 }
 

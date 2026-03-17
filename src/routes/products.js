@@ -33,7 +33,7 @@ router.get('/catalog', authenticateToken, (req, res) => {
 });
 
 // POST /api/products — Register a new product (manufacturer only)
-router.post('/', authenticateToken, authorize('manufacturer', 'admin'), [
+router.post('/', authenticateToken, authorize('admin'), [
     body('product_name').trim().notEmpty().withMessage('Product name required'),
     body('batch_number').trim().notEmpty().withMessage('Batch number required'),
     body('production_date').trim().notEmpty().withMessage('Production date required'),
@@ -95,12 +95,7 @@ router.post('/', authenticateToken, authorize('manufacturer', 'admin'), [
 // GET /api/products — List products
 router.get('/', authenticateToken, (req, res) => {
     try {
-        let products;
-        if (req.user.role === 'manufacturer') {
-            products = dbAll('SELECT product_id, product_name, batch_number, production_date, status, image_url, is_suspicious, created_at FROM products WHERE manufacturer_id = ? ORDER BY created_at DESC', [req.user.userId]);
-        } else {
-            products = dbAll('SELECT product_id, product_name, batch_number, production_date, status, image_url, is_suspicious, created_at FROM products ORDER BY created_at DESC');
-        }
+        const products = dbAll('SELECT product_id, product_name, batch_number, production_date, status, image_url, is_suspicious, created_at FROM products ORDER BY created_at DESC');
         res.json(products);
     } catch (err) {
         res.status(500).json({ error: 'Internal server error' });

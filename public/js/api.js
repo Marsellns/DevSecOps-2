@@ -75,19 +75,7 @@ const NAV_ITEMS = {
         { href: '/supply-chain.html', icon: '🔗', label: 'Supply Chain', id: 'supply' },
         { href: '/admin.html', icon: '⚙️', label: 'Admin Panel', id: 'admin' },
     ],
-    manufacturer: [
-        { href: '/dashboard.html', icon: '📊', label: 'Dashboard', id: 'dashboard' },
-        { href: '/products.html', icon: '🛍️', label: 'Product Catalog', id: 'catalog' },
-        { href: '/register-product.html', icon: '📦', label: 'Register Product', id: 'register' },
-        { href: '/verify-product.html', icon: '✅', label: 'Verify Product', id: 'verify' },
-    ],
     distributor: [
-        { href: '/dashboard.html', icon: '📊', label: 'Dashboard', id: 'dashboard' },
-        { href: '/products.html', icon: '🛍️', label: 'Product Catalog', id: 'catalog' },
-        { href: '/verify-product.html', icon: '✅', label: 'Verify Product', id: 'verify' },
-        { href: '/supply-chain.html', icon: '🔗', label: 'Supply Chain', id: 'supply' },
-    ],
-    retailer: [
         { href: '/dashboard.html', icon: '📊', label: 'Dashboard', id: 'dashboard' },
         { href: '/products.html', icon: '🛍️', label: 'Product Catalog', id: 'catalog' },
         { href: '/verify-product.html', icon: '✅', label: 'Verify Product', id: 'verify' },
@@ -159,7 +147,6 @@ function getStatusBadge(status) {
     const map = {
         'manufactured': 'info',
         'distributed': 'warning',
-        'retail': 'success',
         'sold': 'neutral',
     };
     return `<span class="badge badge-${map[status] || 'neutral'}">${status}</span>`;

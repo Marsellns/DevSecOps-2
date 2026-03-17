@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    role TEXT NOT NULL CHECK(role IN ('admin', 'manufacturer', 'distributor', 'retailer', 'customer')),
+    role TEXT NOT NULL CHECK(role IN ('admin', 'distributor', 'customer')),
     status TEXT DEFAULT 'pending' CHECK(status IN ('pending', 'approved', 'rejected')),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
