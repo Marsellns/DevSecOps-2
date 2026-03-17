@@ -15,8 +15,8 @@ const DEFAULT_IMAGES = [
     '/images/product-sneaker.png',
 ];
 
-// GET /api/products/catalog — Public product catalog (all authenticated users)
-router.get('/catalog', authenticateToken, (req, res) => {
+// GET /api/products/catalog — Public product catalog (no auth required)
+router.get('/catalog', (req, res) => {
     try {
         const products = dbAll(
             `SELECT p.product_id, p.product_name, p.batch_number, p.production_date, 
@@ -102,8 +102,8 @@ router.get('/', authenticateToken, (req, res) => {
     }
 });
 
-// GET /api/products/:id — Single product detail
-router.get('/:id', authenticateToken, (req, res) => {
+// GET /api/products/:id — Single product detail (public)
+router.get('/:id', (req, res) => {
     try {
         const product = dbGet('SELECT * FROM products WHERE product_id = ?', [req.params.id]);
         if (!product) {

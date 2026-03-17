@@ -65,7 +65,7 @@ router.post('/login', authLimiter, [
 router.post('/register-public', authLimiter, [
     body('username').trim().isLength({ min: 3 }).withMessage('Username minimal 3 karakter'),
     body('password').isLength({ min: 6 }).withMessage('Password minimal 6 karakter'),
-    body('role').isIn(['distributor', 'customer']).withMessage('Role tidak valid'),
+    body('role').isIn(['distributor', 'admin']).withMessage('Role tidak valid'),
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -81,8 +81,8 @@ router.post('/register-public', authLimiter, [
             return res.status(409).json({ error: 'Username sudah digunakan' });
         }
 
-        // Customer gets instant approval, others need admin approval
-        const status = role === 'customer' ? 'approved' : 'pending';
+        // All public registrations need admin approval
+        const status = 'pending';
         const hash = bcrypt.hashSync(password, 10);
 
         dbRun('INSERT INTO users (username, password_hash, role, status) VALUES (?, ?, ?, ?)', [username, hash, role, status]);

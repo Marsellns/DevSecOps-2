@@ -2,8 +2,7 @@ let allProducts = [];
 let currentFilter = 'all';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    if (!requireAuth()) return;
-    renderSidebar('catalog');
+    renderPublicNav('catalog');
     await loadCatalog();
 
     // Search handler

@@ -82,17 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         registerBtn.disabled = false;
         registerBtn.textContent = 'Create Account';
     });
-
-    // Role notice toggle
-    const regRole = document.getElementById('regRole');
-    regRole.addEventListener('change', () => {
-        const notice = document.getElementById('roleNotice');
-        if (regRole.value && regRole.value !== 'customer') {
-            notice.classList.remove('hidden');
-        } else {
-            notice.classList.add('hidden');
-        }
-    });
 });
 
 function toggleAuthForm(e) {

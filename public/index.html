@@ -3,77 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Secure Product Verification System - Login to verify product authenticity and track supply chain">
-    <title>Login — Secure Product Verification System</title>
+    <meta name="description" content="Secure Product Verification System - Verify product authenticity and track supply chain">
+    <title>SPV System — Secure Product Verification</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="login-wrapper">
-        <div class="login-card">
-            <div class="login-logo">
-                <div class="logo-icon">🔐</div>
-                <h1>SPV System</h1>
-                <p>Secure Product Verification</p>
+    <!-- Public Navigation -->
+    <nav class="public-nav">
+        <div class="public-nav-inner">
+            <a href="/" class="public-brand">
+                <span class="brand-icon">🔐</span>
+                <span class="brand-name">SPV System</span>
+            </a>
+            <div class="public-nav-links">
+                <a href="/" class="nav-link active">🏠 Home</a>
+                <a href="/verify-product.html" class="nav-link">✅ Verify Product</a>
+                <a href="/products.html" class="nav-link">🛍️ Product Catalog</a>
+                <a href="/login.html" class="nav-link nav-login">🔑 Login</a>
             </div>
-            <div id="alertContainer"></div>
+        </div>
+    </nav>
 
-            <!-- Login Form -->
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
-                </div>
-                <button type="submit" id="loginBtn" class="btn btn-primary btn-lg btn-block">
-                    Sign In
-                </button>
-            </form>
-
-            <!-- Register Form -->
-            <form id="registerForm" class="hidden">
-                <div class="form-group">
-                    <label for="regUsername">Username</label>
-                    <input type="text" id="regUsername" class="form-control" placeholder="Minimal 3 karakter" required minlength="3" autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label for="regPassword">Password</label>
-                    <input type="password" id="regPassword" class="form-control" placeholder="Minimal 6 karakter" required minlength="6" autocomplete="new-password">
-                </div>
-                <div class="form-group">
-                    <label for="regConfirmPassword">Confirm Password</label>
-                    <input type="password" id="regConfirmPassword" class="form-control" placeholder="Ulangi password" required minlength="6" autocomplete="new-password">
-                </div>
-                <div class="form-group">
-                    <label for="regRole">Role</label>
-                    <select id="regRole" class="form-control" required>
-                        <option value="">Pilih role</option>
-                        <option value="customer">Customer</option>
-                        <option value="distributor">Distributor</option>
-                    </select>
-                </div>
-                <div id="roleNotice" class="role-notice hidden">
-                    <span>⚠</span> Role ini memerlukan persetujuan admin sebelum bisa login
-                </div>
-                <button type="submit" id="registerBtn" class="btn btn-primary btn-lg btn-block">
-                    Create Account
-                </button>
-            </form>
-
-            <div class="auth-toggle">
-                <p id="toggleText">Belum punya akun? <a href="#" id="toggleLink" onclick="toggleAuthForm(event)">Buat Akun</a></p>
+    <!-- Hero Section -->
+    <div class="landing-hero">
+        <div class="hero-content">
+            <div class="hero-badge">🛡️ Anti-Counterfeit Platform</div>
+            <h1>Secure Product<br><span class="gradient-text">Verification System</span></h1>
+            <p class="hero-subtitle">Verifikasi keaslian produk dan lacak rantai pasok secara real-time. Lindungi bisnis Anda dari pemalsuan produk.</p>
+            <div class="hero-actions">
+                <a href="/verify-product.html" class="btn btn-primary btn-lg">
+                    🔍 Verify Product
+                </a>
+                <a href="/products.html" class="btn btn-secondary btn-lg">
+                    🛍️ Browse Catalog
+                </a>
             </div>
-
-            <p style="text-align:center; margin-top:12px; font-size:0.8rem; color:var(--text-muted);">
-                Supply Chain Anti-Counterfeit Platform
-            </p>
         </div>
     </div>
-    <script src="/js/api.js"></script>
-    <script src="/js/login.js"></script>
+
+    <!-- Features Section -->
+    <div class="landing-features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>Product Verification</h3>
+                <p>Scan QR code atau masukkan ID produk untuk memverifikasi keaslian produk secara instan.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛍️</div>
+                <h3>Product Catalog</h3>
+                <p>Lihat semua produk yang terdaftar dalam sistem, lengkap dengan status dan informasi batch.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Supply Chain Tracking</h3>
+                <p>Lacak perjalanan produk dari manufaktur hingga konsumen melalui rantai pasok yang transparan.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Cryptographic Security</h3>
+                <p>Setiap produk dilindungi dengan tanda tangan HMAC-SHA256 untuk mencegah pemalsuan.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <p>© 2026 SPV System — Supply Chain Anti-Counterfeit Platform</p>
+    </footer>
 </body>
 </html>

@@ -42,9 +42,12 @@ async function apiRequest(endpoint, options = {}) {
         const data = await res.json();
 
         if (res.status === 401 || res.status === 403) {
-            if (endpoint !== '/auth/login') {
+            // Only redirect to login for protected pages, not public pages
+            const publicPages = ['/', '/index.html', '/verify-product.html', '/products.html', '/login.html'];
+            const currentPath = window.location.pathname;
+            if (!publicPages.includes(currentPath) && endpoint !== '/auth/login') {
                 clearAuth();
-                window.location.href = '/';
+                window.location.href = '/login.html';
                 return null;
             }
         }
@@ -58,7 +61,7 @@ async function apiRequest(endpoint, options = {}) {
 
 function requireAuth() {
     if (!getToken()) {
-        window.location.href = '/';
+        window.location.href = '/login.html';
         return false;
     }
     return true;
@@ -81,17 +84,13 @@ const NAV_ITEMS = {
         { href: '/verify-product.html', icon: '✅', label: 'Verify Product', id: 'verify' },
         { href: '/supply-chain.html', icon: '🔗', label: 'Supply Chain', id: 'supply' },
     ],
-    customer: [
-        { href: '/products.html', icon: '🛍️', label: 'Product Catalog', id: 'catalog' },
-        { href: '/verify-product.html', icon: '✅', label: 'Verify Product', id: 'verify' },
-    ],
 };
 
 function renderSidebar(activeId) {
     const user = getUser();
     if (!user) return;
 
-    const items = NAV_ITEMS[user.role] || NAV_ITEMS.customer;
+    const items = NAV_ITEMS[user.role] || NAV_ITEMS.distributor;
 
     const sidebar = document.getElementById('sidebar');
     if (!sidebar) return;
@@ -123,6 +122,34 @@ function renderSidebar(activeId) {
                     <div class="role">${user.role}</div>
                 </div>
                 <button class="btn-logout" onclick="logout()" title="Logout">⏻</button>
+            </div>
+        </div>
+    `;
+}
+
+// ===== Public Navigation for non-logged-in pages =====
+
+function renderPublicNav(activePage) {
+    const nav = document.getElementById('publicNav');
+    if (!nav) return;
+
+    const links = [
+        { href: '/', icon: '🏠', label: 'Home', id: 'home' },
+        { href: '/verify-product.html', icon: '✅', label: 'Verify Product', id: 'verify' },
+        { href: '/products.html', icon: '🛍️', label: 'Product Catalog', id: 'catalog' },
+        { href: '/login.html', icon: '🔑', label: 'Login', id: 'login' },
+    ];
+
+    nav.innerHTML = `
+        <div class="public-nav-inner">
+            <a href="/" class="public-brand">
+                <span class="brand-icon">🔐</span>
+                <span class="brand-name">SPV System</span>
+            </a>
+            <div class="public-nav-links">
+                ${links.map(l => `
+                    <a href="${l.href}" class="nav-link ${l.id === activePage ? 'active' : ''} ${l.id === 'login' ? 'nav-login' : ''}">${l.icon} ${l.label}</a>
+                `).join('')}
             </div>
         </div>
     `;

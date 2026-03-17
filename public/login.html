@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to SPV System - Admin & Distributor Access">
+    <title>Login — Secure Product Verification System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Public Navigation -->
+    <nav class="public-nav">
+        <div class="public-nav-inner">
+            <a href="/" class="public-brand">
+                <span class="brand-icon">🔐</span>
+                <span class="brand-name">SPV System</span>
+            </a>
+            <div class="public-nav-links">
+                <a href="/" class="nav-link">🏠 Home</a>
+                <a href="/verify-product.html" class="nav-link">✅ Verify Product</a>
+                <a href="/products.html" class="nav-link">🛍️ Product Catalog</a>
+                <a href="/login.html" class="nav-link nav-login active">🔑 Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="logo-icon">🔐</div>
+                <h1>SPV System</h1>
+                <p>Admin & Distributor Login</p>
+            </div>
+            <div id="alertContainer"></div>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                <button type="submit" id="loginBtn" class="btn btn-primary btn-lg btn-block">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="hidden">
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" class="form-control" placeholder="Minimal 3 karakter" required minlength="3" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" class="form-control" placeholder="Minimal 6 karakter" required minlength="6" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" class="form-control" placeholder="Ulangi password" required minlength="6" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="regRole">Role</label>
+                    <select id="regRole" class="form-control" required>
+                        <option value="">Pilih role</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div id="roleNotice" class="role-notice">
+                    <span>⚠</span> Role ini memerlukan persetujuan admin sebelum bisa login
+                </div>
+                <button type="submit" id="registerBtn" class="btn btn-primary btn-lg btn-block">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="auth-toggle">
+                <p id="toggleText">Belum punya akun? <a href="#" id="toggleLink" onclick="toggleAuthForm(event)">Buat Akun</a></p>
+            </div>
+
+            <p style="text-align:center; margin-top:12px; font-size:0.8rem; color:var(--text-muted);">
+                Supply Chain Anti-Counterfeit Platform
+            </p>
+        </div>
+    </div>
+    <script src="/js/api.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+</html>

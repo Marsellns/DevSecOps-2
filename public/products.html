@@ -206,14 +206,15 @@
     </style>
 </head>
 <body>
-    <div class="app-layout">
-        <aside class="sidebar" id="sidebar"></aside>
-        <main class="main-content">
-            <div class="content-header">
-                <h1>🛍️ Product Catalog</h1>
-                <p>Browse all registered products in the supply chain</p>
-            </div>
-            <div class="content-body">
+    <!-- Public Navigation -->
+    <nav class="public-nav" id="publicNav"></nav>
+
+    <div class="public-page-wrapper">
+        <div class="content-header">
+            <h1>🛍️ Product Catalog</h1>
+            <p>Browse all registered products in the supply chain</p>
+        </div>
+        <div class="content-body">
                 <div id="alertContainer"></div>
 
                 <!-- Search & Filter -->
@@ -240,7 +241,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 
     <!-- Product Detail Modal -->

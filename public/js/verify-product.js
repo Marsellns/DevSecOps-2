@@ -1,8 +1,7 @@
 let qrScanner = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (!requireAuth()) return;
-    renderSidebar('verify');
+    renderPublicNav('verify');
     initQRScanner();
 
     document.getElementById('verifyForm').addEventListener('submit', async (e) => {

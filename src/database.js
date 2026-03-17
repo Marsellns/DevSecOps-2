@@ -45,7 +45,6 @@ function initDatabase() {
         const defaultUsers = [
             { username: 'admin',        password: 'admin123',    role: 'admin' },
             { username: 'distributor',  password: 'dist123456',  role: 'distributor' },
-            { username: 'customer',     password: 'cust123456',  role: 'customer' },
         ];
 
         for (const u of defaultUsers) {
