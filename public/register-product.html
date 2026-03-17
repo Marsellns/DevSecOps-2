@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Product — SPV System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar"></aside>
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Register Product</h1>
+                <p>Register a new product with cryptographic verification</p>
+            </div>
+            <div class="content-body">
+                <div id="alertContainer"></div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>📦 Product Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="productForm">
+                                <div class="form-group">
+                                    <label for="productName">Product Name</label>
+                                    <input type="text" id="productName" class="form-control" placeholder="e.g. Premium Widget A" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="batchNumber">Batch Number</label>
+                                    <input type="text" id="batchNumber" class="form-control" placeholder="e.g. BATCH-2024-001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productionDate">Production Date</label>
+                                    <input type="date" id="productionDate" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productImage">Product Image (optional)</label>
+                                    <input type="file" id="productImage" class="form-control" accept="image/*" style="padding:8px">
+                                    <div id="imagePreview" style="margin-top:10px;display:none">
+                                        <img id="previewImg" style="max-width:100%;max-height:150px;border-radius:var(--radius-sm);border:1px solid var(--border-color)">
+                                    </div>
+                                </div>
+                                <button type="submit" id="registerBtn" class="btn btn-primary btn-lg btn-block">
+                                    🔒 Register & Generate QR Code
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card" id="resultCard" style="display:none">
+                        <div class="card-header">
+                            <h3>✅ Registration Result</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="qr-display mb-3" id="qrDisplay"></div>
+                            <div class="product-info mt-3" id="productInfo"></div>
+                            <div class="mt-3">
+                                <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px">HMAC-SHA256 Signature</p>
+                                <div class="signature-display" id="signatureDisplay"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h3>📋 Registered Products</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Name</th>
+                                        <th>Batch</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productsTable">
+                                    <tr><td colspan="5" class="text-center" style="padding:40px;color:var(--text-muted)">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/js/api.js"></script>
+    <script src="/js/register-product.js"></script>
+</body>
+</html>

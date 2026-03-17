@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain — SPV System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar"></aside>
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Supply Chain Tracking</h1>
+                <p>Track and update product distribution status</p>
+            </div>
+            <div class="content-body">
+                <div id="alertContainer"></div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>📦 Products</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productsTable">
+                                        <tr><td colspan="4" class="text-center" style="padding:40px;color:var(--text-muted)">Loading...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card" id="historyCard" style="display:none">
+                            <div class="card-header">
+                                <h3>🔗 Distribution History</h3>
+                                <span class="badge badge-info" id="historyProductId"></span>
+                            </div>
+                            <div class="card-body">
+                                <div class="timeline" id="timeline"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/js/api.js"></script>
+    <script src="/js/supply-chain.js"></script>
+</body>
+</html>
