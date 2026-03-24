@@ -146,7 +146,8 @@ function renderPublicNav(activePage) {
                 <span class="brand-icon">🔐</span>
                 <span class="brand-name">SPV System</span>
             </a>
-            <div class="public-nav-links">
+            <button class="public-menu-toggle" onclick="togglePublicNav()" aria-label="Toggle menu">☰</button>
+            <div class="public-nav-links" id="publicNavLinks">
                 ${links.map(l => `
                     <a href="${l.href}" class="nav-link ${l.id === activePage ? 'active' : ''} ${l.id === 'login' ? 'nav-login' : ''}">${l.icon} ${l.label}</a>
                 `).join('')}
@@ -178,3 +179,18 @@ function getStatusBadge(status) {
     };
     return `<span class="badge badge-${map[status] || 'neutral'}">${status}</span>`;
 }
+
+// ===== Mobile Nav Toggles =====
+window.togglePublicNav = function() {
+    const navLinks = document.querySelector('.public-nav-links');
+    if (navLinks) {
+        navLinks.classList.toggle('active');
+    }
+};
+
+window.toggleSidebar = function() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+        sidebar.classList.toggle('open');
+    }
+};
