@@ -1,17 +1,17 @@
 /* ===== CSS Variables & Design System ===== */
 :root {
     --bg-primary: #0a0e1a;
-    --bg-secondary: #111827;
-    --bg-card: rgba(17, 24, 39, 0.8);
-    --bg-glass: rgba(255, 255, 255, 0.03);
+    --bg-secondary: #0f1524;
+    --bg-card: rgba(17, 24, 39, 0.45);
+    --bg-glass: rgba(255, 255, 255, 0.05);
     --border-color: rgba(255, 255, 255, 0.08);
-    --border-glow: rgba(99, 102, 241, 0.3);
-    --text-primary: #f1f5f9;
+    --border-glow: rgba(99, 102, 241, 0.4);
+    --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
     --accent-primary: #6366f1;
     --accent-secondary: #8b5cf6;
-    --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+    --accent-gradient: linear-gradient(135deg, #4f46e5, #ec4899, #8b5cf6);
     --success: #10b981;
     --success-bg: rgba(16, 185, 129, 0.1);
     --warning: #f59e0b;
@@ -22,15 +22,19 @@
     --info-bg: rgba(59, 130, 246, 0.1);
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
     --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
-    --shadow-lg: 0 10px 40px rgba(0,0,0,0.5);
-    --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.6);
+    --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.25);
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --sidebar-width: 260px;
+}
+
+@keyframes textShine {
+    to { background-position: 200% center; }
 }
 
 /* ===== Reset & Base ===== */
@@ -79,39 +83,43 @@ a:hover { color: var(--accent-secondary); }
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 60%);
     top: -200px;
     right: -200px;
     border-radius: 50%;
-    animation: pulse-glow 4s ease-in-out infinite;
+    filter: blur(80px);
+    animation: pulse-glow 8s ease-in-out infinite;
 }
 
 .login-wrapper::after {
     content: '';
     position: absolute;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
-    bottom: -100px;
-    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.2), transparent 60%);
+    bottom: -150px;
+    left: -150px;
     border-radius: 50%;
-    animation: pulse-glow 5s ease-in-out infinite reverse;
+    filter: blur(80px);
+    animation: pulse-glow 10s ease-in-out infinite reverse;
 }
 
 @keyframes pulse-glow {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 1; }
+    0% { transform: scale(1) rotate(0deg); opacity: 0.6; border-radius: 50%; }
+    50% { transform: scale(1.15) rotate(180deg); opacity: 1; border-radius: 35% 65% 55% 45% / 40% 45% 55% 60%; }
+    100% { transform: scale(1) rotate(360deg); opacity: 0.6; border-radius: 50%; }
 }
 
 .login-card {
     background: var(--bg-card);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid var(--border-color);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), var(--shadow-lg), var(--shadow-glow);
     border-radius: var(--radius-xl);
     padding: 48px 40px;
     width: 100%;
     max-width: 420px;
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
     position: relative;
     z-index: 1;
     animation: slideUp 0.6s ease-out;
@@ -141,12 +149,14 @@ a:hover { color: var(--accent-secondary); }
 }
 
 .login-logo h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 800;
     background: var(--accent-gradient);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: textShine 4s linear infinite;
 }
 
 .login-logo p {
@@ -364,7 +374,9 @@ a:hover { color: var(--accent-secondary); }
 
 .stat-card {
     background: var(--bg-card);
+    backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid var(--border-color);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-md);
     padding: 24px;
     transition: var(--transition);
@@ -378,7 +390,7 @@ a:hover { color: var(--accent-secondary); }
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 4px;
     background: var(--accent-gradient);
     opacity: 0;
     transition: var(--transition);
@@ -386,8 +398,8 @@ a:hover { color: var(--accent-secondary); }
 
 .stat-card:hover {
     border-color: var(--border-glow);
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), var(--shadow-glow);
+    transform: translateY(-6px) scale(1.02);
 }
 
 .stat-card:hover::before {
@@ -431,7 +443,9 @@ a:hover { color: var(--accent-secondary); }
 /* ===== Cards ===== */
 .card {
     background: var(--bg-card);
+    backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid var(--border-color);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: var(--transition);
@@ -439,6 +453,8 @@ a:hover { color: var(--accent-secondary); }
 
 .card:hover {
     border-color: var(--border-glow);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 8px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
 }
 
 .card-header {
@@ -510,16 +526,22 @@ select.form-control {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px 20px;
-    border: none;
+    padding: 10px 24px;
+    border: 1px solid transparent;
     border-radius: var(--radius-sm);
     font-family: var(--font-family);
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.96);
 }
 
 .btn:disabled {
@@ -530,12 +552,26 @@ select.form-control {
 .btn-primary {
     background: var(--accent-gradient);
     color: white;
-    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: var(--transition);
+}
+
+.btn-primary:hover:not(:disabled)::after {
+    left: 100%;
+    transition: left 0.6s ease;
 }
 
 .btn-primary:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
 }
 
 .btn-secondary {
@@ -1145,9 +1181,11 @@ tr:hover td {
     font-size: 1rem;
     font-weight: 700;
     background: var(--accent-gradient);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: textShine 4s linear infinite;
 }
 
 .public-nav-links {
@@ -1232,23 +1270,25 @@ tr:hover td {
     position: absolute;
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.12), transparent 70%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 60%);
     top: -250px;
     right: -200px;
     border-radius: 50%;
-    animation: pulse-glow 4s ease-in-out infinite;
+    filter: blur(80px);
+    animation: pulse-glow 8s ease-in-out infinite;
 }
 
 .landing-hero::after {
     content: '';
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.08), transparent 70%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.12), transparent 60%);
     bottom: -150px;
     left: -100px;
     border-radius: 50%;
-    animation: pulse-glow 5s ease-in-out infinite reverse;
+    filter: blur(80px);
+    animation: pulse-glow 10s ease-in-out infinite reverse;
 }
 
 .hero-content {
@@ -1282,9 +1322,11 @@ tr:hover td {
 
 .gradient-text {
     background: var(--accent-gradient);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: textShine 4s linear infinite;
 }
 
 .hero-subtitle {
@@ -1319,7 +1361,9 @@ tr:hover td {
 
 .feature-card {
     background: var(--bg-card);
+    backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid var(--border-color);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-md);
     padding: 32px 24px;
     text-align: center;
@@ -1334,8 +1378,8 @@ tr:hover td {
 
 .feature-card:hover {
     border-color: var(--border-glow);
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-4px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 10px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px) scale(1.02);
 }
 
 .feature-icon {
