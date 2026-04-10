@@ -19,7 +19,21 @@ pipeline {
                 sh 'npm install'
             }
         }
-
+        
+        stage('SAST - SonarQube') {
+    steps {
+        withSonarQubeEnv('SonarQube') {
+            sh '''
+            npx sonar-scanner \
+            -Dsonar.projectKey=devsecops-app \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.login=TOKEN_KAMU
+            '''
+        }
+    }
+}
+        
         stage('SAST - Security Scan') {
             steps {
                 sh 'npm audit || true'
