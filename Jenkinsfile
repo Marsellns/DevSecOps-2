@@ -21,13 +21,14 @@ pipeline {
             }
         }
         
-        stage('SAST - SonarQube') {
+      stage('SAST - SonarQube') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh """
                     npx sonar-scanner \
                     -Dsonar.projectKey=devsecops-app \
                     -Dsonar.sources=. \
+                    -Dsonar.exclusions=node_modules/** \
                     -Dsonar.host.url=http://${HOST_IP}:9000 \
                     -Dsonar.login=squ_d441c4d650301d8bd53ae324d95d2fff4ed98e3d
                     """
