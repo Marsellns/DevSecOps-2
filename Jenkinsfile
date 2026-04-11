@@ -30,7 +30,7 @@ pipeline {
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://${HOST_IP}:9000 \
                     -Dsonar.login=squ_d441c4d650301d8bd53ae324d95d2fff4ed98e3d
-                    '''
+                    """
                 }
             }
         }
@@ -59,7 +59,6 @@ pipeline {
 
         stage('DAST - Dynamic Test') {
             steps {
-                // Menggunakan image terbaru dan IP Host
                 sh '''
                 docker run --rm -t zaproxy/zap2docker-stable zap-baseline.py \
                 -t http://${HOST_IP}:$PORT || true
@@ -69,7 +68,6 @@ pipeline {
 
         stage('Load Testing') {
             steps {
-                // Menggunakan IP Host
                 sh 'ab -n 200 -c 10 http://${HOST_IP}:$PORT/ || true'
             }
         }
