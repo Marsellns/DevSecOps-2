@@ -27,8 +27,8 @@ pipeline {
             npx sonar-scanner \
             -Dsonar.projectKey=devsecops-app \
             -Dsonar.sources=. \
-            -Dsonar.host.url=http://localhost:9000 \
-            -Dsonar.login=TOKEN_KAMU
+            -Dsonar.host.url=http://host.docker.internal:9000
+            -Dsonar.login=squ_d441c4d650301d8bd53ae324d95d2fff4ed98e3d
             '''
         }
     }
