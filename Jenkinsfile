@@ -4,6 +4,7 @@ pipeline {
     environment {
         APP_NAME = "devsecops-app"
         PORT = "3000"
+        HOST_IP = "10.0.2.15" 
     }
 
     stages {
@@ -21,18 +22,18 @@ pipeline {
         }
         
         stage('SAST - SonarQube') {
-    steps {
-        withSonarQubeEnv('SonarQube') {
-            sh '''
-            npx sonar-scanner \
-            -Dsonar.projectKey=devsecops-app \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=http://host.docker.internal:9000
-            -Dsonar.login=squ_d441c4d650301d8bd53ae324d95d2fff4ed98e3d
-            '''
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                    npx sonar-scanner \
+                    -Dsonar.projectKey=devsecops-app \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://${HOST_IP}:9000 \
+                    -Dsonar.login=squ_d441c4d650301d8bd53ae324d95d2fff4ed98e3d
+                    '''
+                }
+            }
         }
-    }
-}
         
         stage('SAST - Security Scan') {
             steps {
@@ -58,16 +59,18 @@ pipeline {
 
         stage('DAST - Dynamic Test') {
             steps {
+                // Menggunakan image terbaru dan IP Host
                 sh '''
-                docker run --rm -t owasp/zap2docker-stable zap-baseline.py \
-                -t http://localhost:$PORT || true
+                docker run --rm -t zaproxy/zap2docker-stable zap-baseline.py \
+                -t http://${HOST_IP}:$PORT || true
                 '''
             }
         }
 
         stage('Load Testing') {
             steps {
-                sh 'ab -n 200 -c 10 http://localhost:$PORT/ || true'
+                // Menggunakan IP Host
+                sh 'ab -n 200 -c 10 http://${HOST_IP}:$PORT/ || true'
             }
         }
 
