@@ -24,7 +24,7 @@ pipeline {
         stage('SAST - SonarQube') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '''
+                    sh """
                     npx sonar-scanner \
                     -Dsonar.projectKey=devsecops-app \
                     -Dsonar.sources=. \
