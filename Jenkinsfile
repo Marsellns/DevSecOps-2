@@ -5,7 +5,7 @@ pipeline {
         APP_NAME = "devsecops-app"
         PORT = "3000"
         HOST_IP = "10.0.2.15" 
-        SONAR_TOKEN = credentials('sonarqube-token')
+    
     }
 
     stages {
@@ -31,7 +31,7 @@ pipeline {
                     -Dsonar.sources=. \
                     -Dsonar.exclusions=node_modules/** \
                     -Dsonar.host.url=http://${HOST_IP}:9000 \
-                    -Dsonar.login=$SONAR_TOKEN
+                    -Dsonar.login=squ_d441c4d650301d8bd53ae324d95d2fff4ed98e3d
                     """
                 }
             }
